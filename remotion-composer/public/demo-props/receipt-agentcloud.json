@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR AGENT CLOUD",
+  "tagline": "Build, run, scale agents — $0.00 to start",
+  "items": [
+    { "name": "Agent Runtime (24/7)", "price": "$0.00" },
+    { "name": "Chat + Skill + Wiki Memory", "price": "$0.00" },
+    { "name": "Cron Scheduler + 1400 APIs", "price": "$0.00" },
+    { "name": "GPU Spot + CDN Delivery", "price": "$0.00" },
+    { "name": "Infisical Secrets + Audit", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment AGENTCLOUD + Follow"
+}

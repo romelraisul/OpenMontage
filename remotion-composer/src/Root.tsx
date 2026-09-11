@@ -16,6 +16,7 @@ import { ProductReveal, ProductRevealProps } from "./components/ProductReveal";
 import { CaptionOverlay, WordCaption } from "./components/CaptionOverlay";
 import { CollageBurst, CollageBurstProps } from "./CollageBurst";
 import { LyricOverlay, LyricOverlayProps } from "./LyricOverlay";
+import { Receipt, receiptDefaults, ReceiptProps } from "./Receipt";
 
 // ---------------------------------------------------------------------------
 // Theme System — prevents every video from looking like dark fintech
@@ -267,6 +268,15 @@ export const Root: React.FC = () => {
           highlightColor: "#FACC15",
           backgroundColor: "rgba(15, 23, 42, 0.75)",
         }}
+      />
+      <Composition
+        id="Receipt"
+        component={Receipt}
+        durationInFrames={30 * 15}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={receiptDefaults as ReceiptProps}
       />
       <Composition
         id="CollageBurst"
