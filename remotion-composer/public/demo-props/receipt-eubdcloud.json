@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR EU-BD CLOUD",
+  "tagline": "Sovereign infrastructure — $0.00 to start",
+  "items": [
+    { "name": "VPS from $5/mo, 0-setup", "price": "$0.00" },
+    { "name": "EU + BD Data Residency", "price": "$0.00" },
+    { "name": "Coolify Self-Hosted Control Plane", "price": "$0.00" },
+    { "name": "Infisical Zero-Trust Secrets", "price": "$0.00" },
+    { "name": "OpenObserve 24/7 Audit Logs", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment CLOUD + Follow"
+}
