@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR GPU MARKET",
+  "tagline": "EU-BD spot GPUs — $0.20/hr",
+  "items": [
+    { "name": "RTX 4090 (24GB)", "price": "$0.20/hr" },
+    { "name": "H100 (80GB)", "price": "$1.50/hr" },
+    { "name": "RTX 5060 (8GB)", "price": "$0.05/hr" },
+    { "name": "EU data residency", "price": "included" },
+    { "name": "Infisical audit log", "price": "included" }
+  ],
+  "total": "from $0.05/hr",
+  "cta": "Comment GPU + Follow"
+}
