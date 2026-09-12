@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR PRIVACY CLOUD",
+  "tagline": "Zero-knowledge infrastructure — $0.00 to start",
+  "items": [
+    { "name": "End-to-End Encrypted Storage", "price": "$0.00" },
+    { "name": "Zero-Knowledge Secrets Vault", "price": "$0.00" },
+    { "name": "EU + BD Data Residency", "price": "$0.00" },
+    { "name": "OpenObserve Audit Logs", "price": "$0.00" },
+    { "name": "Infisical Compliance + WAF", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment PRIVACY + Follow"
+}
