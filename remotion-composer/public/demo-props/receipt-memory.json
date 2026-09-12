@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR MEMORY",
+  "tagline": "Agent never forgets — $0.00 to start",
+  "items": [
+    { "name": "Chat Memory (TencentDB)", "price": "$0.00" },
+    { "name": "Skill Registry + Loader", "price": "$0.00" },
+    { "name": "Wiki Knowledge Graph", "price": "$0.00" },
+    { "name": "CodeGraph Indexer", "price": "$0.00" },
+    { "name": "1400+ API Connectors", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment MEMORY + Follow"
+}
