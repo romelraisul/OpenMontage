@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR HOSTING",
+  "tagline": "EU-BD sovereign cloud — $0.00 to start",
+  "items": [
+    { "name": "VPS from $5/mo, 0-setup", "price": "$0.00" },
+    { "name": "99.99% Uptime + Free SSL", "price": "$0.00" },
+    { "name": "EU + BD Data Residency", "price": "$0.00" },
+    { "name": "Built-in CDN + WAF", "price": "$0.00" },
+    { "name": "Infisical Secrets + Audit", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment HOSTING + Follow"
+}

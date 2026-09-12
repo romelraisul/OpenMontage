@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR GPU SPOT MARKET",
+  "tagline": "EU-BD sovereign GPU — $0.00 to start",
+  "items": [
+    { "name": "RTX 4090 Spot @ $0.20/hr", "price": "$0.00" },
+    { "name": "H100 Spot @ $1.50/hr", "price": "$0.00" },
+    { "name": "EU + BD Data Residency", "price": "$0.00" },
+    { "name": "Infisical Secrets + Audit", "price": "$0.00" },
+    { "name": "OpenObserve Compliance Logs", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment GPU + Follow"
+}
