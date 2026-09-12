@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR CONTEXT GRAPH",
+  "tagline": "Agents that never forget — trillion unlock",
+  "items": [
+    { "name": "Chat Memory — every session", "price": "$0.00" },
+    { "name": "Skill library — learn once", "price": "$0.00" },
+    { "name": "Wiki — org knowledge, live", "price": "$0.00" },
+    { "name": "CodeGraph — every repo mapped", "price": "$0.00" },
+    { "name": "1400+ API connectors", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment GRAPH + Follow"
+}
