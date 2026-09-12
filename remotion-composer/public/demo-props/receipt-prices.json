@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR CREATIVE STUDIO",
+  "tagline": "5 services — real prices, real work",
+  "items": [
+    { "name": "Video Ads (৳2,900)", "price": "৳2,900" },
+    { "name": "Dubbing — EN to Bangla (৳1,900)", "price": "৳1,900" },
+    { "name": "Music — copyright free (৳990)", "price": "৳990" },
+    { "name": "Voice Clone (৳1,490)", "price": "৳1,490" },
+    { "name": "Podcast Editing (৳1,990)", "price": "৳1,990" }
+  ],
+  "total": "৳9,270",
+  "cta": "Comment PRICE + Follow"
+}
