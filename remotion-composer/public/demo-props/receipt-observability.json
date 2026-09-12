@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR OBSERVABILITY",
+  "tagline": "Zero-key monitoring — $0.00 to start",
+  "items": [
+    { "name": "OpenObserve Full-Stack Logs", "price": "$0.00" },
+    { "name": "Compliant Audit Trails", "price": "$0.00" },
+    { "name": "1400+ API Connectors", "price": "$0.00" },
+    { "name": "Real-Time Alerting", "price": "$0.00" },
+    { "name": "Infisical Secrets Vault", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment OBSERVE + Follow"
+}
