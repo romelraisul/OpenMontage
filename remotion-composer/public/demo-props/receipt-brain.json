@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR BRAIN",
+  "tagline": "17 free models — one /ask endpoint",
+  "items": [
+    { "name": "Kilocode + Orca (cloud free)", "price": "$0.00" },
+    { "name": "Local Qwen 4B private tier", "price": "$0.00" },
+    { "name": "Wiki-cited answers, Bangla + English", "price": "$0.00" },
+    { "name": "OpenAI /v1 compatible API", "price": "$0.00" },
+    { "name": "24/7 fleet, zero credit card", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment BRAIN + Follow"
+}
