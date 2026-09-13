@@ -1,0 +1,14 @@
+{
+  "shop": "HOSTAMAR ORCHESTRATOR",
+  "tagline": "serverless queue — your PC renders",
+  "items": [
+    { "name": "D1 job database", "price": "$0.00" },
+    { "name": "KV pc-online status", "price": "$0.00" },
+    { "name": "hostamar-jobs queue", "price": "$0.00" },
+    { "name": "Vercel push → PC pull", "price": "$0.00" },
+    { "name": "Cron tick every 5 min", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment RENDER + Follow",
+  "fontFamily": "monospace"
+}
