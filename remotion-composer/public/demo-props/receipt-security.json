@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR SECURITY",
+  "tagline": "Layer 5 surveillance — zero false trust",
+  "items": [
+    { "name": "Distillation-cluster detection", "price": "$0.00" },
+    { "name": "Device-farm detection (10+ accts)", "price": "$0.00" },
+    { "name": "Salted ipHash — no raw IPs stored", "price": "$0.00" },
+    { "name": "Nightly cron + Telegram alerts", "price": "$0.00" },
+    { "name": "25% sampled, never breaks chat", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment GUARD + Follow"
+}

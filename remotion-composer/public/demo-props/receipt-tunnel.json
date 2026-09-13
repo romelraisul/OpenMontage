@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR TUNNEL",
+  "tagline": "2 tunnels, 0 downtime — $0.00",
+  "items": [
+    { "name": "ai.hostamar.com tunnel", "price": "$0.00" },
+    { "name": "comfy.hostamar.com tunnel", "price": "$0.00" },
+    { "name": "WAF + edge in front", "price": "$0.00" },
+    { "name": "auto-restart on config drift", "price": "$0.00" },
+    { "name": "Infisical vaulted secrets", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment TUNNEL + Follow"
+}

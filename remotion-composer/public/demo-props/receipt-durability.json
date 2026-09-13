@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR DURABILITY",
+  "tagline": "1,369 files, 0 lost — $0.00",
+  "items": [
+    { "name": "1,369 files verified-backed-up", "price": "$0.00" },
+    { "name": "Guardian watchdog ticking", "price": "$0.00" },
+    { "name": "Checksum verify before keep", "price": "$0.00" },
+    { "name": "Never delete until verified", "price": "$0.00" },
+    { "name": "Every render preserved forever", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment DURABLE + Follow"
+}
