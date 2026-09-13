@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR AI GATEWAY",
+  "tagline": "17 free models — one /v1 endpoint",
+  "items": [
+    { "name": "Cloud LLMs (kilocode, orca)", "price": "$0.00" },
+    { "name": "Local Qwen — private tier", "price": "$0.00" },
+    { "name": "OpenAI-compatible /v1 API", "price": "$0.00" },
+    { "name": "SSE streaming + [DONE]", "price": "$0.00" },
+    { "name": "No credit card, no keys", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment FREEAI + Follow"
+}
