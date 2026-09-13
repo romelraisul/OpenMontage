@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR MCP CATALOG",
+  "tagline": "109 AI tools, one public API — $0.00",
+  "items": [
+    { "name": "13 categories — Business to Video", "price": "$0.00" },
+    { "name": "0 duplicate tool IDs — deduped", "price": "$0.00" },
+    { "name": "Public JSON endpoint, no key", "price": "$0.00" },
+    { "name": "300s edge cache — instant", "price": "$0.00" },
+    { "name": "Read-only, safe to consume", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment TOOLS + Follow"
+}
