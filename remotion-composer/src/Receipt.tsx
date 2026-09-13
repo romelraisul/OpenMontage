@@ -17,6 +17,7 @@ export interface ReceiptProps {
   items?: ReceiptItem[];
   total?: string;
   cta?: string;
+  fontFamily?: string;
 }
 
 export const receiptDefaults: Required<ReceiptProps> = {
@@ -31,6 +32,7 @@ export const receiptDefaults: Required<ReceiptProps> = {
   ],
   total: "$0.00",
   cta: "Comment NOCARD + Follow",
+  fontFamily: "monospace",
 };
 
 // Zero-key receipt explainer: dark backdrop, receipt paper unrolls,
@@ -42,6 +44,7 @@ export const Receipt: React.FC<ReceiptProps> = (props) => {
     items = receiptDefaults.items,
     total = receiptDefaults.total,
     cta = receiptDefaults.cta,
+    fontFamily = receiptDefaults.fontFamily,
   } = props;
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -70,7 +73,7 @@ export const Receipt: React.FC<ReceiptProps> = (props) => {
           backgroundColor: "#FFFFFF",
           borderRadius: 18,
           padding: "48px 56px",
-          fontFamily: "monospace",
+          fontFamily: fontFamily,
           opacity: interpolate(frame, [0, 12], [0, 1]),
         }}
       >
