@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR EVALUATION",
+  "tagline": "CI-grade AI eval — $0.00",
+  "items": [
+    { "name": "Regression suite (auto)", "price": "$0.00" },
+    { "name": "Prompt diff + score", "price": "$0.00" },
+    { "name": "Latency/cost per call", "price": "$0.00" },
+    { "name": "Visual + functional gates", "price": "$0.00" },
+    { "name": "Every commit, every model", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment EVAL + Follow"
+}
