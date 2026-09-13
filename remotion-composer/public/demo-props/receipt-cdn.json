@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR CDN",
+  "tagline": "1369 uploads served — $0.00",
+  "items": [
+    { "name": "Cloudflare edge + WAF", "price": "$0.00" },
+    { "name": "EU + BD residency", "price": "$0.00" },
+    { "name": "Zero-downtime deploys", "price": "$0.00" },
+    { "name": "1369 files uploaded", "price": "$0.00" },
+    { "name": "Infisical secrets vault", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment CDN + Follow"
+}
