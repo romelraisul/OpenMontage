@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR FULL STACK",
+  "tagline": "3 products — 1 infra layer",
+  "items": [
+    { "name": "Agent Cloud ($149B market)", "price": "$0.00" },
+    { "name": "Sovereign Video OS ($6B market)", "price": "$0.00" },
+    { "name": "EU-BD GPU Spot Market ($5.2T DC)", "price": "$0.00" },
+    { "name": "Infisical + OpenObserve + Coolify", "price": "$0.00" },
+    { "name": "25 repos + 3 products = trillion entry", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment STACK + Follow"
+}

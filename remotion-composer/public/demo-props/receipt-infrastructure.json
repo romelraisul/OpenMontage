@@ -1,0 +1,12 @@
+{
+  "shop": "HOSTAMAR INFRASTRUCTURE",
+  "tagline": "3 products on 25 repos — trillion entry",
+  "items": [
+    { "name": "Agent Cloud (agent.hostamar.com)", "price": "$49/mo" },
+    { "name": "Sovereign Video OS", "price": "$0.10/min render" },
+    { "name": "EU-BD GPU Spot Market", "price": "$0.20/h RTX 4090" },
+    { "name": "Infisical + OpenObserve", "price": "$0.00 compliance" }
+  ],
+  "total": "$0.00 to start",
+  "cta": "Comment INFRA + Follow"
+}
