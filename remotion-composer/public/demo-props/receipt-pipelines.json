@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR VIDEO PIPELINES",
+  "tagline": "12 pipelines — one click, script to screen",
+  "items": [
+    { "name": "OpenCut — timeline editor", "price": "$0.00" },
+    { "name": "HunyuanVideo 1.5 — text to video", "price": "$0.00" },
+    { "name": "Voicebox + Piper — voice", "price": "$0.00" },
+    { "name": "ACE-Step — music + SFX", "price": "$0.00" },
+    { "name": "OpenMontage — auto compose", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment PIPELINE + Follow"
+}
