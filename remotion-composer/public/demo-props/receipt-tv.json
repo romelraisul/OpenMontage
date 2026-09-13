@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR TV",
+  "tagline": "23 free videos — zero keys, zero card",
+  "items": [
+    { "name": "23 renders, h264 + aac", "price": "$0.00" },
+    { "name": "1080×1920 Remotion CPU", "price": "$0.00" },
+    { "name": "Hostamar CDN, global 200", "price": "$0.00" },
+    { "name": "17-model AI voice + script", "price": "$0.00" },
+    { "name": "Open source, no signup", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment TV + Follow"
+}
