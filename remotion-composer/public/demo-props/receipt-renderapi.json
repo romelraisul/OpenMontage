@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR RENDER API",
+  "tagline": "script to video — $0.10 per minute",
+  "items": [
+    { "name": "60s vertical short", "price": "$0.10" },
+    { "name": "12 pipelines, one call", "price": "included" },
+    { "name": "White-label (your brand)", "price": "$0.00" },
+    { "name": "bKash paywall + CDN", "price": "$0.00" },
+    { "name": "Auto YouTube/TikTok publish", "price": "$0.00" }
+  ],
+  "total": "$0.10/min",
+  "cta": "Comment RENDER + Follow"
+}
