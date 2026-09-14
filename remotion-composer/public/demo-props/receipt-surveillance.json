@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR SURVEILLANCE",
+  "tagline": "Abuse detection layer — $0.00",
+  "items": [
+    { "name": "Distillation clusters flagged", "price": "$0.00" },
+    { "name": "Device farms detected", "price": "$0.00" },
+    { "name": "Salted ipHash — no raw IPs", "price": "$0.00" },
+    { "name": "25% sampled, chat never breaks", "price": "$0.00" },
+    { "name": "Telegram alerts, nightly cron", "price": "$0.00" }
+  ],
+  "total": "$0.00",
+  "cta": "Comment WATCH + Follow"
+}
