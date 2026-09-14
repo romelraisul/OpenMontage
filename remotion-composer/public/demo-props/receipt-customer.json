@@ -1,0 +1,14 @@
+{
+  "shop": "HOSTAMAR CUSTOMER",
+  "tagline": "First paying customer — the receipt that closes the loop",
+  "items": [
+    { "name": "Agent Cloud $49/মাস", "price": "bKash" },
+    { "name": "১২৩ প্রোডাক্ট লাইভ", "price": "0 ড্রাফট" },
+    { "name": "সেন্ড মানি চেকআউট", "price": "E2E" },
+    { "name": "১৭ এজেন্ট ফ্লীট", "price": "payroll $0" },
+    { "name": "আজকের বিল", "price": "$0.00" }
+  ],
+  "total": "১ কাস্টমার — আজ",
+  "cta": "কমেন্ট করুন CUSTOMER + ফলো করুন",
+  "fontFamily": "Noto Sans Bengali"
+}
