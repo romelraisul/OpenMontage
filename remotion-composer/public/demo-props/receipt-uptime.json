@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR UPTIME",
+  "tagline": "9 containers, 17 models — always on",
+  "items": [
+    { "name": "9/9 containers running now", "price": "$0.00" },
+    { "name": "17 free models — one /v1 endpoint", "price": "$0.00" },
+    { "name": "Monitor sweep every 10 min", "price": "$0.00" },
+    { "name": "Auto-restart on drift, no pager", "price": "$0.00" },
+    { "name": "Live status: hostamar.com/admin/fleet", "price": "$0.00" }
+  ],
+  "total": "$0.00 / month",
+  "cta": "Comment UP + Follow"
+}
