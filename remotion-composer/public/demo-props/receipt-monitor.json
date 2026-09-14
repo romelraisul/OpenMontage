@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR MONITOR",
+  "tagline": "17 false alarms — 0 real outages",
+  "items": [
+    { "name": "9/9 containers running now", "price": "$0.00" },
+    { "name": "17 free models — one /v1 endpoint", "price": "$0.00" },
+    { "name": "Drift sweep every 10 min", "price": "$0.00" },
+    { "name": "17 false alarms, 0 real outages", "price": "$0.00" },
+    { "name": "Live status: hostamar.com/admin/fleet", "price": "$0.00" }
+  ],
+  "total": "$0.00 / month",
+  "cta": "Comment MONITOR + Follow"
+}
