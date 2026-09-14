@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR PAYMENTS",
+  "tagline": "bKash checkout layer — BD-first",
+  "items": [
+    { "name": "bKash tokenized checkout live", "price": "$0.00 SaaS fee" },
+    { "name": "Capture + refund loop verified", "price": "$0.00" },
+    { "name": "Manual fallback built-in", "price": "$0.00" },
+    { "name": "BD ৳990–৳2,900 local pricing", "price": "$0.00" },
+    { "name": "No Stripe, no foreign card", "price": "$0.00" }
+  ],
+  "total": "$0.00 platform fee",
+  "cta": "Comment PAY + Follow"
+}
