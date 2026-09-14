@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR TELEDRIVE",
+  "tagline": "Telegram as unlimited storage — $0.00",
+  "items": [
+    { "name": "Unlimited storage via Telegram clouds", "price": "$0.00" },
+    { "name": "Live now: :8091 — files streaming", "price": "$0.00" },
+    { "name": "Pgroonga search on Postgres 16", "price": "$0.00" },
+    { "name": "Self-hosted — data stays with you", "price": "$0.00" },
+    { "name": "Streams video, serves any file type", "price": "$0.00" }
+  ],
+  "total": "$0.00 / month",
+  "cta": "Comment DRIVE + Follow"
+}
