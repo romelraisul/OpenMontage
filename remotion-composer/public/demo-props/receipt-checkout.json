@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR CHECKOUT",
+  "tagline": "Real order, paid path — 4 sec",
+  "items": [
+    { "name": "123 products live in store", "price": "$0.00" },
+    { "name": "Checkout E2E: 4.55s real order", "price": "$0.00" },
+    { "name": "Buyer auto-mirrored to CRM", "price": "$0.00" },
+    { "name": "Bridge warm cron — no 25s cold tax", "price": "$0.00" },
+    { "name": "Pay: bKash / Nagad / Rocket send-money", "price": "$0.00" }
+  ],
+  "total": "$0.00/month",
+  "cta": "Comment SHOP + Follow"
+}
