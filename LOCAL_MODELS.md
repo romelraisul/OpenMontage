@@ -20,7 +20,8 @@ provider-node resolution code first.
 
 ## Video
 
-HunyuanVideo stack on the **Windows** ComfyUI (`C:\ComfyUI_Download`, queue `:8188`):
+HunyuanVideo stack in **`~/ComfyUI/models`** (moved off C: Sep 2026 — Windows
+ComfyUI portable is gone, WSL is authoritative):
 
 - `diffusion_models/.../hunyuan_video_720_fp8_e4m3fn.safetensors` (~13G)
 - `vae/hunyuan_video_vae_bf16.safetensors`
@@ -33,14 +34,10 @@ before submitting.
 
 ## Image (thumbnails, covers, Shorts art)
 
-`checkpoints/sd_xl_turbo_1.0_fp16.safetensors` (~7G) on the Windows ComfyUI.
+`checkpoints/sd_xl_turbo_1.0_fp16.safetensors` (~7G) in `~/ComfyUI/models`.
 SDXL-Turbo: 1–4 steps at 1024px, fits 8GB, seconds per image. Good enough for
 thumbnails — not for gallery art. Escalate to a bigger checkpoint only when a
 thumbnail demonstrably underperforms.
-
-Exception to the big-files-on-WSL rule: ComfyUI runs on Windows and reads
-`C:\ComfyUI_Download\...`. The 28G HunyuanVideo stack already lives there;
-the image checkpoint follows the same pattern.
 
 ## Voice
 
