@@ -1,59 +1,55 @@
 #!/usr/bin/env bash
-# Resilient big-file fetch from HuggingFace.
+# Resilient big-file fetch (v2 — curl-based).
 #
-# Why this exists: this box's pipe to HF's CDN stalls to ~0 B/s partway through
-# multi-GB files (observed: 1.6G then dead; recovery to 197 B/s). A single
-# `hf download` then sits forever at 0%. This loop watches staged bytes and
-# restarts the client when stalled — the Rust `hf` client resumes `.incomplete`
-# partials, so progress is never lost.
+# Why curl and not `hf download`: over this box's throttled pipe the hf client
+# stalls mid-file AND does not resume its `.incomplete` partial (23 attempts,
+# every restart began near zero). curl `-C -` resumes against Accept-Ranges
+# CDNs, and `--speed-limit/--speed-time` aborts stalled transfers natively.
+# Each attempt re-hits the resolve URL so Xet signatures never go stale.
 #
-# DO NOT use hf_transfer here: it DELETES the partial on start (observed: 1.5G
-# wiped) instead of resuming.
+# Usage: fetch_model.sh <resolve-url> <dest-file> <expected-bytes> [max-attempts]
+# Example: fetch_model.sh \
+#   https://huggingface.co/stabilityai/sdxl-turbo/resolve/main/sd_xl_turbo_1.0_fp16.safetensors \
+#   /home/romel/ComfyUI/models/checkpoints/sd_xl_turbo_1.0_fp16.safetensors \
+#   6938081905
 #
-# Usage: fetch_model.sh <repo> <include-pattern> <local-dir> [max-attempts]
-#
-# ponytail: stall detection is "bytes unchanged for 120s", not a speed test.
-# A speed test would need a baseline that varies by hour; unchanged-bytes is
-# the only signal that matters (stalled vs moving).
+# Do NOT use hf_transfer here: it DELETES the partial on start.
+# Do NOT auto-export HF_TOKEN: the token file on this box is dead and a dead
+# token turns public pulls into 401s.
 set -uo pipefail
 
-REPO="${1:?repo required}"; PATTERN="${2:?include pattern required}"
-DESTDIR="${3:?local dir required}"; MAX="${4:-50}"
-STABLE_SECS=120
+URL="${1:?resolve url required}"
+DEST="${2:?dest file required}"
+EXPECTED="${3:?expected bytes required}"
+MAX="${4:-200}"
+PART="$DEST.part"
 
-export PATH="/home/romel/.local/bin:$PATH"
-mkdir -p "$DESTDIR"
-
-# NOTE: do NOT auto-export HF_TOKEN here. The token file on this box
-# (~/.huggingface/token, Jul 2026) is DEAD, and sending it turns public
-# downloads into 401s (verified: dead-token probe -> 401, anonymous -> 302).
-# Export a VALID HF_TOKEN in the environment only when you have one;
-# unauthenticated large pulls can hard-stall at 0 bytes, in which case a fresh
-# token from https://huggingface.co/settings/tokens is the fix.
-
-bytes() { du -sb "$DESTDIR" 2>/dev/null | cut -f1; }
+mkdir -p "$(dirname "$DEST")"
+# adopt any orphan hf partial as the resume base
+if [ ! -f "$PART" ]; then
+  ORPHAN=$(find "$(dirname "$DEST")/.cache" -name "*.incomplete" 2>/dev/null | head -1)
+  [ -n "$ORPHAN" ] && cp "$ORPHAN" "$PART" && echo "adopted partial: $ORPHAN"
+fi
 
 attempt=0
 while [ "$attempt" -lt "$MAX" ]; do
   attempt=$((attempt + 1))
-  if ls "$DESTDIR"/*.safetensors 2>/dev/null | grep -qv ".incomplete"; then
-    f=$(ls -la "$DESTDIR"/*.safetensors 2>/dev/null | head -1)
-    echo "DONE attempt=$attempt file: $f"
+  have=$(stat -c%s "$PART" 2>/dev/null || echo 0)
+  if [ "$have" -ge "$EXPECTED" ]; then
+    truncate -s "$EXPECTED" "$PART" 2>/dev/null
+    mv -f "$PART" "$DEST"
+    echo "DONE attempt=$attempt bytes=$EXPECTED"
     exit 0
   fi
-  echo "attempt $attempt/$MAX ..."
-  hf download "$REPO" --include "$PATTERN" --local-dir "$DESTDIR" >/tmp/fetch-model.log 2>&1 &
-  pid=$!
-  last=$(bytes); still=0
-  while kill -0 "$pid" 2>/dev/null; do
-    sleep 20
-    now=$(bytes)
-    if [ "$now" -gt "$last" ]; then last=$now; still=0; else still=$((still + 20)); fi
-    if [ "$still" -ge "$STABLE_SECS" ]; then
-      echo "  stalled at $((now/1024/1024))MB for ${STABLE_SECS}s — restarting client (partial kept)"
-      kill "$pid" 2>/dev/null; sleep 3; kill -9 "$pid" 2>/dev/null; break
-    fi
-  done
-  wait "$pid" 2>/dev/null && echo "  client exited clean"
+  echo "attempt $attempt/$MAX have=${have}B of ${EXPECTED}B ..."
+  # --speed-time: abort when under 1KB/s for 180s (stall, not slowness).
+  # ponytail: 1KB/s floor, not a target — slower-than-that still aborts even
+  # if bytes move, because at that rate 7G takes 80+ days. Raise the floor,
+  # never lower it.
+  curl -sL -C - --speed-limit 1000 --speed-time 180 --retry 0 \
+    -o "$PART" "$URL" 2>/tmp/fetch-curl.err
+  rc=$?
+  echo "  curl exit=$rc have=$(stat -c%s "$PART" 2>/dev/null || echo 0)B"
+  sleep 5
 done
-echo "FAILED after $MAX attempts"; tail -3 /tmp/fetch-model.log; exit 1
+echo "FAILED after $MAX attempts"; exit 1
