@@ -1,0 +1,13 @@
+{
+  "shop": "HOSTAMAR CHECKOUT v2",
+  "tagline": "bKash-style paste just works — ৳2,900",
+  "items": [
+    { "name": "+880 / 8801 / dashes → 01X auto", "price": "fixed today" },
+    { "name": "No more dead 2nd click on paste", "price": "live-verified" },
+    { "name": "Bad numbers still rejected (400)", "price": "strict kept" },
+    { "name": "bKash · Nagad · Rocket checkout", "price": "৳2,900" },
+    { "name": "Order mirrored to CRM in 6s", "price": "real prod order" }
+  ],
+  "total": "৳2,900 · one click",
+  "cta": "Comment BUY + Follow"
+}
