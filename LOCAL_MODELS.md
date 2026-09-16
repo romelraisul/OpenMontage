@@ -34,10 +34,13 @@ before submitting.
 
 ## Image (thumbnails, covers, Shorts art)
 
-`checkpoints/sd_xl_turbo_1.0_fp16.safetensors` (~7G) in `~/ComfyUI/models`.
-SDXL-Turbo: 1–4 steps at 1024px, fits 8GB, seconds per image. Good enough for
-thumbnails — not for gallery art. Escalate to a bigger checkpoint only when a
-thumbnail demonstrably underperforms.
+`checkpoints/sd_xl_turbo_1.0_fp16.safetensors` (6.9G, byte-exact + header-verified)
+in `~/ComfyUI/models`, read by the Windows origin through extra_model_paths.yaml.
+SDXL-Turbo: 4 steps at 1024px in ~40s, verified first render
+(projects/thumbnails/sdxl-first-proof.png — green play mark on dark, on-brief).
+API note: POST /prompt through the wsl-browser-bridge fails on duplicate
+Content-Type; use Windows curl.exe interop against :8189 directly (or plain
+urllib without explicit Content-Type).
 
 ## Voice
 
