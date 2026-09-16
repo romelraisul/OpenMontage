@@ -150,8 +150,12 @@ def render(props_path, out_mp4, concurrency=2):
     return subprocess.run(cmd, cwd=COMPOSER, capture_output=True, text=True)
 
 
-def mux_narration(video, audio, out):
+def mux_narration(video, audio, out, start_sec=0.0):
     """Original audio track under the picture.
+
+    start_sec places the narration at a scene's cue time on a silent bed, so a
+    long episode can carry narration per scene instead of one clip at the top
+    (build-log-003: 13s of speech over 207s, i.e. 94% silence).
 
     No -shortest: narration is usually shorter than the episode, and -shortest
     truncates the VIDEO to the audio length (a 59s programme became 11.7s). Pad
@@ -159,11 +163,92 @@ def mux_narration(video, audio, out):
     """
     cmd = [
         "ffmpeg", "-y", "-i", video, "-i", audio,
+        "-filter_complex",
+        f"[1:a]adelay={int(start_sec * 1000)}|{int(start_sec * 1000)},apad[a]",
         "-c:v", "copy", "-c:a", "aac", "-b:a", "128k",
-        "-map", "0:v:0", "-map", "1:a:0",
-        "-af", "apad", "-shortest", out,
+        "-map", "0:v:0", "-map", "[a]",
+        "-shortest", out,
     ]
     return subprocess.run(cmd, capture_output=True, text=True)
+
+
+def narrate_scenes(props_path, video, out, voice="bn-BD-PradeepNeural"):
+    """Narrate every scene at its own cue time, and refuse a mostly-silent result.
+
+    Long episodes need narration through the whole runtime. Each scene gets one
+    short line, delayed to the scene's in_seconds; the result is rejected when
+    the audible fraction is too low, because a file that is 90% silence passes
+    the naive mean_volume test and still airs dead air.
+    """
+    import asyncio
+    import edge_tts
+
+    with open(props_path, encoding="utf-8") as fh:
+        cuts = json.load(fh)["cuts"]
+    parts = []
+    for i, c in enumerate(cuts):
+        text = (c.get("text") or c.get("stat") or c.get("title")
+                or c.get("terminalTitle") or "").strip()
+        if not text:
+            continue
+        start = float(c.get("in_seconds", 0))
+        end = float(c.get("out_seconds", start + 4))
+        mp3 = f"/tmp/scene-narr-{i}.mp3"
+        try:
+            asyncio.run(edge_tts.Communicate(text, voice).save(mp3))
+        except Exception:
+            continue
+        if os.path.exists(mp3) and os.path.getsize(mp3) > 512:
+            parts.append((start, mp3))
+    if not parts:
+        return None
+
+    inputs = ["-i", video]
+    for _, mp3 in parts:
+        inputs += ["-i", mp3]
+    chains, mix = [], []
+    for n, (start, _) in enumerate(parts, start=1):
+        ms = int(start * 1000)
+        chains.append(f"[{n}:a]adelay={ms}|{ms},volume=1.0[s{n}]")
+        mix.append(f"[s{n}]")
+    fc = (";".join(chains) + ";" + "".join(mix)
+          + f"amix=inputs={len(parts)}:duration=longest:normalize=0[mix];"
+          + "[mix]apad[a]")
+    cmd = (["ffmpeg", "-y", "-v", "error"] + inputs
+           + ["-filter_complex", fc, "-map", "0:v:0", "-map", "[a]",
+              "-c:v", "copy", "-c:a", "aac", "-b:a", "128k", "-shortest", out])
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    if r.returncode != 0:
+        return None
+    return out if not is_silent(out) else None
+
+
+def audible_fraction(path, window=10.0, floor_db=-50.0):
+    """Fraction of the runtime that carries audible audio.
+
+    ponytail: fixed 10s windows sampled end to end, not a per-sample envelope.
+    Enough to catch dead-air stretches; tighten the window if a 10s dead spot
+    ever slips through.
+    """
+    dur, _ = probe(path)
+    if not dur:
+        return 0.0
+    total = int(dur // window) or 1
+    loud = 0
+    for i in range(total):
+        r = subprocess.run(
+            ["ffmpeg", "-v", "info", "-ss", str(i * window), "-t", str(window),
+             "-i", path, "-af", "volumedetect", "-f", "null", "-"],
+            capture_output=True, text=True)
+        for line in r.stderr.splitlines():
+            if "mean_volume:" in line:
+                try:
+                    if float(line.split("mean_volume:")[1].split("dB")[0]) >= floor_db:
+                        loud += 1
+                except ValueError:
+                    pass
+                break
+    return loud / total
 
 
 def probe(path):
@@ -179,6 +264,26 @@ def probe(path):
         return dur, streams
     except Exception:
         return None, []
+
+
+def is_silent(path, floor_db=-50.0):
+    """True when the audio track carries no audible signal.
+
+    A file can have a perfectly good `aac` stream that is digital silence — the
+    exact failure that shipped build-log-003 (mean_volume -91 dB). Presence of a
+    stream is not presence of sound, so any narrated artifact must pass this.
+    """
+    r = subprocess.run(
+        ["ffmpeg", "-v", "info", "-i", path, "-af", "volumedetect",
+         "-f", "null", "-"],
+        capture_output=True, text=True)
+    for line in r.stderr.splitlines():
+        if "mean_volume:" in line:
+            try:
+                return float(line.split("mean_volume:")[1].split("dB")[0]) < floor_db
+            except ValueError:
+                return True
+    return True  # no measurement -> treat as silent (fail closed)
 
 
 if __name__ == "__main__":
@@ -198,5 +303,11 @@ if __name__ == "__main__":
     for a, b in zip(cuts, cuts[1:]):
         assert a["out_seconds"] <= b["in_seconds"] + 0.01, f"overlap at {a['id']}"
     assert narration.strip(), "narration must not be empty"
+    # a narrated episode whose audio is digital silence must never pass as done
+    assert is_silent("/home/romel/OpenMontage/projects/programmes/build-log-003---free-gpu-lab.mp4"), \
+        "silence detector failed on the known-silent 003 artifact"
+    assert not is_silent("/home/romel/OpenMontage/projects/programmes/build-log-001.mp4"), \
+        "silence detector false-positived on the known-good 001 artifact"
     print(f"OK  episode={secs}s  cuts={len(cuts)}  chapters=2  narration={len(narration)} chars")
+    print("    silence detector: 003 silent=True  001 silent=False")
     print(f"    scene types: {sorted({c.get('type') for c in cuts})}")
