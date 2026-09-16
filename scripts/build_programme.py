@@ -87,20 +87,57 @@ def write_props(cuts, path, fps=FPS):
     return props
 
 
+PIPER_VOICE = os.environ.get(
+    "HOSTAMAR_PIPER_VOICE",
+    "/home/romel/voices/en/en_US/lessac/medium/en_US-lessac-medium.onnx",
+)
+
+
+def narrate_piper(text, out_wav, voice=PIPER_VOICE):
+    """In-house narration. No account, no network, no key — runs on this box."""
+    if not (voice and os.path.exists(voice)):
+        return None
+    with open("/tmp/piper-narr.txt", "w", encoding="utf-8") as fh:
+        fh.write(text)
+    r = subprocess.run(
+        ["piper", "-m", voice, "-i", "/tmp/piper-narr.txt", "-f", out_wav],
+        capture_output=True, text=True)
+    if r.returncode != 0 or not os.path.exists(out_wav):
+        return None
+    # wav -> mp3 so the mux path stays identical
+    mp3 = os.path.splitext(out_wav)[0] + ".mp3"
+    r = subprocess.run(
+        ["ffmpeg", "-y", "-v", "error", "-i", out_wav, "-c:a", "libmp3lame",
+         "-b:a", "128k", mp3],
+        capture_output=True, text=True)
+    return mp3 if r.returncode == 0 and os.path.getsize(mp3) > 0 else None
+
+
 def narrate(text, out_mp3, voice="en-US-GuyNeural"):
-    """edge-tts is installed and free — original audio, no API key."""
+    """edge-tts is installed and free — original audio, no API key.
+
+    Falls back to in-house piper when edge-tts is unreachable, so a network
+    outage never blocks a programme render. ponytail: piper is the fallback,
+    not the default — edge-tts voices sound human; piper sounds like a robot.
+    Swap the order only if offline narration matters more than voice quality.
+    """
     try:
         import edge_tts  # noqa: F401
     except ImportError:
-        return None
+        return narrate_piper(text, os.path.splitext(out_mp3)[0] + ".wav")
     import asyncio
     import edge_tts
 
     async def _go():
         await edge_tts.Communicate(text, voice).save(out_mp3)
 
-    asyncio.run(_go())
-    return out_mp3 if os.path.exists(out_mp3) and os.path.getsize(out_mp3) > 0 else None
+    try:
+        asyncio.run(_go())
+    except Exception:
+        return narrate_piper(text, os.path.splitext(out_mp3)[0] + ".wav")
+    if os.path.exists(out_mp3) and os.path.getsize(out_mp3) > 0:
+        return out_mp3
+    return narrate_piper(text, os.path.splitext(out_mp3)[0] + ".wav")
 
 
 def render(props_path, out_mp4, concurrency=2):
