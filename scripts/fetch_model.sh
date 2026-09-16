@@ -24,6 +24,13 @@ STABLE_SECS=120
 export PATH="/home/romel/.local/bin:$PATH"
 mkdir -p "$DESTDIR"
 
+# NOTE: do NOT auto-export HF_TOKEN here. The token file on this box
+# (~/.huggingface/token, Jul 2026) is DEAD, and sending it turns public
+# downloads into 401s (verified: dead-token probe -> 401, anonymous -> 302).
+# Export a VALID HF_TOKEN in the environment only when you have one;
+# unauthenticated large pulls can hard-stall at 0 bytes, in which case a fresh
+# token from https://huggingface.co/settings/tokens is the fix.
+
 bytes() { du -sb "$DESTDIR" 2>/dev/null | cut -f1; }
 
 attempt=0
