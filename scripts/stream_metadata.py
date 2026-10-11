@@ -91,6 +91,10 @@ def build_tags(topic_words, extra=("hostamar", "bangla tech", "live")):
 def write_meta(topic, props_path, out_dir):
     """Title + description + tags, as files ready to paste into Studio."""
     chapters = chapters_from_programme(props_path)
+    # strip a brand suffix already present in the props title — build_title adds it
+    for suffix in (" | Hostamar TV Live", " | Hostamar TV", "| Hostamar TV Live"):
+        if topic.endswith(suffix):
+            topic = topic[: -len(suffix)].rstrip()
     meta = {
         "title": build_title(topic),
         "description": build_description(topic, chapters),
